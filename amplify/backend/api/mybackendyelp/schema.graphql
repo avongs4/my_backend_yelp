@@ -1,0 +1,7 @@
+type Business @model {
+  id: ID!
+  name: String!
+  description: String
+  rating: Int
+  address: String
+}
