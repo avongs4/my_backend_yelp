@@ -1,16 +1,42 @@
 {
-  "name": "my_backend_yelp",
+  "name": "yelp-clone",
   "version": "1.0.0",
-  "description": "***",
-  "main": "index.js",
+  "description": "A Yelp-like application deployed with AWS Amplify",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://git.us.qwasar.io/my_backend_yelp_180541_cuz-cf/my_backend_yelp.git"
+  "dependencies": {
+    "@aws-amplify/api-graphql": "latest",
+    "@aws-amplify/auth": "latest",
+    "@aws-amplify/core": "latest",
+    "@aws-amplify/ui-react": "latest",
+    "aws-amplify": "latest",
+    "graphql": "latest",
+    "graphql-tag": "latest",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "react-scripts": "^5.0.0",
+    "web-vitals": "^4.2.4"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "eslint": "latest",
+    "prettier": "latest"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
