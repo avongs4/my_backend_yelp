@@ -1,7 +1,13 @@
-type Business @model {
+type Restaurant @model {
   id: ID!
   name: String!
-  description: String
-  rating: Int
-  address: String
+  rating: Float!
+  reviews: [Review] @hasMany
+}
+
+type Review @model {
+  id: ID!
+  restaurantID: ID! @index
+  content: String!
+  rating: Float!
 }
