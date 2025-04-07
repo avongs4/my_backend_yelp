@@ -1,27 +1,17 @@
+// src/pages/RestaurantPage.js
 import React from "react";
 import { useParams } from "react-router-dom";
 
-const restaurantData = {
-  1: { name: "Pasta Palace", rating: 4.5, reviews: ["Great pasta!", "Loved it!"] },
-  2: { name: "Sushi Spot", rating: 4.8, reviews: ["Fresh sushi!", "Amazing!"] },
-};
-
-function RestaurantPage() {
-  let { id } = useParams();
-  const restaurant = restaurantData[id];
+const RestaurantPage = () => {
+  const { id } = useParams();
 
   return (
-    <div>
-      <h1>{restaurant.name}</h1>
-      <p>⭐ {restaurant.rating}</p>
-      <h3>Reviews:</h3>
-      <ul>
-        {restaurant.reviews.map((review, idx) => (
-          <li key={idx}>{review}</li>
-        ))}
-      </ul>
+    <div className="container mt-5">
+      <h2 className="mb-3">Restaurant Details</h2>
+      <p className="lead">You're viewing details for restaurant ID: <strong>{id}</strong></p>
+      <p className="text-muted">More details coming soon!</p>
     </div>
   );
-}
+};
 
 export default RestaurantPage;

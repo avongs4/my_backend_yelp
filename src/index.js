@@ -1,18 +1,16 @@
+// index.js
 import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import RestaurantPage from "./pages/RestaurantPage";
-import LoginPage from "./pages/LoginPage";
-import "./index.css";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-ReactDOM.render(
-  <Router>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/restaurant/:id" element={<RestaurantPage />} />
-      <Route path="/login" element={<LoginPage />} />
-    </Routes>
-  </Router>,
-  document.getElementById("root")
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );
