@@ -14,6 +14,7 @@
     "@aws-amplify/auth": "latest",
     "@aws-amplify/core": "latest",
     "@aws-amplify/ui-react": "latest",
+    "@popperjs/core": "^2.11.8",
     "aws-amplify": "latest",
     "bootstrap": "^5.3.5",
     "graphql": "^16.10.0",

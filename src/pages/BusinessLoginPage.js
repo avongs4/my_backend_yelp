@@ -1,30 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const CreateAccountPage = ({ setIsLoggedIn }) => {
+const BusinessLoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Business logging in with:", email, password);
+    // Here, you can implement the actual authentication for business login
 
-    // Check if passwords match
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
-    console.log("Account created with:", email, password);
-    setIsLoggedIn(true); // Simulate login after account creation
-    navigate("/restaurants"); // Redirect to restaurants page after account creation
+    // Simulate a successful login and redirect
+    navigate("/restaurants"); // Redirect to restaurants page after login
   };
 
   return (
     <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       <div className="card p-4 shadow-sm" style={{ width: "400px" }}>
-        <h2 className="text-center mb-4">Create Account</h2>
+        <h2 className="text-center mb-4">Business Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label">Email:</label>
@@ -46,24 +40,11 @@ const CreateAccountPage = ({ setIsLoggedIn }) => {
               required
             />
           </div>
-          <div className="mb-3">
-            <label className="form-label">Confirm Password:</label>
-            <input
-              type="password"
-              className="form-control"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-success w-100">Create Account</button>
+          <button type="submit" className="btn btn-success w-100">Login</button>
         </form>
-        <div className="mt-3 text-center">
-          <p>Already have an account? <a href="/login">Login</a></p>
-        </div>
       </div>
     </div>
   );
 };
 
-export default CreateAccountPage;
+export default BusinessLoginPage;

@@ -1,6 +1,11 @@
 // src/pages/HomePage.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
+// Helper to read URL query params
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const restaurants = [
   {
@@ -15,24 +20,31 @@ const restaurants = [
     name: "Masa World",
     category: "Masa",
     rating: 4.7,
-    image: "https://source.unsplash.com/600x400/?sushi",
+    image: "https://source.unsplash.com/600x400/?masa",
   },
   {
     id: 3,
-    name: " Heaven",
+    name: "Heaven",
     category: "Tuwo",
     rating: 4.2,
-    image: "https://source.unsplash.com/600x400/?hotdog",
+    image: "https://source.unsplash.com/600x400/?tuwo",
   },
 ];
 
 const HomePage = () => {
+  const query = useQuery();
+  const search = query.get("search")?.toLowerCase() || "";
+
+  const filteredRestaurants = restaurants.filter((r) =>
+    r.name.toLowerCase().includes(search)
+  );
+
   return (
     <div className="container my-5">
       <h2 className="mb-4 text-center">Search restaurants...</h2>
 
       <div className="row">
-        {restaurants.map((r) => (
+        {filteredRestaurants.map((r) => (
           <div className="col-md-4 mb-4" key={r.id}>
             <div className="card h-100 shadow-sm">
               <img src={r.image} className="card-img-top" alt={r.name} />
