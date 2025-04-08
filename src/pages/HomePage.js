@@ -41,30 +41,38 @@ const HomePage = () => {
 
   return (
     <div className="container my-5">
-      <h2 className="mb-4 text-center">Search restaurants...</h2>
+      <h2 className="mb-4 text-center">
+        {search ? `Results for "${search}"` : "All Restaurants"}
+      </h2>
 
-      <div className="row">
-        {filteredRestaurants.map((r) => (
-          <div className="col-md-4 mb-4" key={r.id}>
-            <div className="card h-100 shadow-sm">
-              <img src={r.image} className="card-img-top" alt={r.name} />
-              <div className="card-body">
-                <h5 className="card-title">{r.name}</h5>
-                <p className="card-text text-muted">{r.category}</p>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span className="text-warning fw-bold">⭐ {r.rating}</span>
-                  <Link
-                    to={`/restaurant/${r.id}`}
-                    className="btn btn-sm btn-outline-primary"
-                  >
-                    View
-                  </Link>
+      {filteredRestaurants.length > 0 ? (
+        <div className="row">
+          {filteredRestaurants.map((r) => (
+            <div className="col-md-4 mb-4" key={r.id}>
+              <div className="card h-100 shadow-sm border-0">
+                <img src={r.image} className="card-img-top" alt={r.name} />
+                <div className="card-body">
+                  <h5 className="card-title">{r.name}</h5>
+                  <p className="card-text text-muted">{r.category}</p>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <span className="text-warning fw-bold">
+                      ⭐ {r.rating.toFixed(1)}
+                    </span>
+                    <Link
+                      to={`/restaurant/${r.id}`}
+                      className="btn btn-sm btn-outline-primary"
+                    >
+                      View
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-muted">No restaurants found.</p>
+      )}
     </div>
   );
 };
