@@ -1,13 +1,14 @@
 // src/pages/HomePage.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-// Helper to read URL query params
+// Helper for query string
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const restaurants = [
+// Default demo restaurants
+const defaultRestaurants = [
   {
     id: 1,
     name: "Harry's Pizza",
@@ -35,29 +36,39 @@ const HomePage = () => {
   const query = useQuery();
   const search = query.get("search")?.toLowerCase() || "";
 
-  const filteredRestaurants = restaurants.filter((r) =>
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    const localRestaurants = JSON.parse(localStorage.getItem("restaurants")) || [];
+    setRestaurants([...defaultRestaurants, ...localRestaurants]);
+  }, []);
+
+  const filtered = restaurants.filter((r) =>
     r.name.toLowerCase().includes(search)
   );
 
   return (
     <div className="container my-5">
-      <h2 className="mb-4 text-center">
-        {search ? `Results for "${search}"` : "All Restaurants"}
-      </h2>
+      <h2 className="mb-4 text-center">Browse Restaurants</h2>
 
-      {filteredRestaurants.length > 0 ? (
-        <div className="row">
-          {filteredRestaurants.map((r) => (
+      <div className="row">
+        {filtered.length === 0 ? (
+          <p className="text-center">No restaurants found.</p>
+        ) : (
+          filtered.map((r) => (
             <div className="col-md-4 mb-4" key={r.id}>
-              <div className="card h-100 shadow-sm border-0">
-                <img src={r.image} className="card-img-top" alt={r.name} />
+              <div className="card h-100 shadow-sm">
+                <img
+                  src={r.image}
+                  className="card-img-top"
+                  alt={r.name}
+                  style={{ height: "200px", objectFit: "cover" }}
+                />
                 <div className="card-body">
                   <h5 className="card-title">{r.name}</h5>
                   <p className="card-text text-muted">{r.category}</p>
                   <div className="d-flex justify-content-between align-items-center">
-                    <span className="text-warning fw-bold">
-                      ⭐ {r.rating.toFixed(1)}
-                    </span>
+                    <span className="text-warning fw-bold">⭐ {r.rating}</span>
                     <Link
                       to={`/restaurant/${r.id}`}
                       className="btn btn-sm btn-outline-primary"
@@ -68,11 +79,9 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-muted">No restaurants found.</p>
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 };

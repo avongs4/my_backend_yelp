@@ -1,67 +1,67 @@
+// src/pages/CreateAccountPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const CreateAccountPage = ({ setIsLoggedIn }) => {
+const CreateAccountPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const validatePassword = (pwd) => {
+    const minLength = /.{6,}/;
+    const hasNumber = /\d/;
+    const hasUpperCase = /[A-Z]/;
 
-    // Check if passwords match
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+    if (!minLength.test(pwd)) return "Password must be at least 6 characters.";
+    if (!hasNumber.test(pwd)) return "Password must include at least one number.";
+    if (!hasUpperCase.test(pwd)) return "Password must include at least one uppercase letter.";
+    return "";
+  };
+
+  const handleCreateAccount = (e) => {
+    e.preventDefault();
+    const validationError = validatePassword(password);
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
-    console.log("Account created with:", email, password);
-    setIsLoggedIn(true); // Simulate login after account creation
-    navigate("/restaurants"); // Redirect to restaurants page after account creation
+    // Save to localStorage
+    localStorage.setItem("user", JSON.stringify({ email, password }));
+    console.log("Account created:", { email, password });
+    navigate("/login"); // Redirect to login page
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-      <div className="card p-4 shadow-sm" style={{ width: "400px" }}>
-        <h2 className="text-center mb-4">Create Account</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label">Email:</label>
-            <input
-              type="email"
-              className="form-control"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Password:</label>
-            <input
-              type="password"
-              className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Confirm Password:</label>
-            <input
-              type="password"
-              className="form-control"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-success w-100">Create Account</button>
-        </form>
-        <div className="mt-3 text-center">
-          <p>Already have an account? <a href="/login">Login</a></p>
+    <div className="container mt-5">
+      <h2>Create Account</h2>
+      {error && <div className="alert alert-danger">{error}</div>}
+      <form onSubmit={handleCreateAccount}>
+        <div className="mb-3">
+          <label className="form-label">Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-      </div>
+
+        <div className="mb-3">
+          <label className="form-label">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary">Create Account</button>
+      </form>
     </div>
   );
 };

@@ -38,7 +38,7 @@ function App() {
       {/* ✅ Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <Link className="navbar-brand" to="/">Yelp Clone</Link>
+          <Link className="navbar-brand" to="/">Yelp</Link>
 
           <button
             className="navbar-toggler"
