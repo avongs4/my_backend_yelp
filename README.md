@@ -65,6 +65,8 @@ Example of usage from the terminal:
 npm start
 Once the app is running, you can use it through the browser.
 
+Hosted: https://dinmae9jbdetb.cloudfront.net
+
 ### The Core Team
 Avong Haruna
 Noah Ezekiel
