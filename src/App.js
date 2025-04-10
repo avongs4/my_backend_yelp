@@ -76,7 +76,7 @@ function App() {
                 <Link className="nav-link" to="/restaurants">Restaurants</Link>
               </li>
 
-              {/* ✅ For Business Dropdown */}
+              {/* ✅ For Business Dropdown (Updated) */}
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -89,20 +89,10 @@ function App() {
                   For Business
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="businessDropdown">
+                  {/* Only the "Add Your Business" link */}
                   <li>
                     <Link className="dropdown-item" to="/add-restaurant">
                       Add Your Business
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/business-login">
-                      Business Login
-                    </Link>
-                  </li>
-                  {/* New "View All Businesses" Link */}
-                  <li>
-                    <Link className="dropdown-item" to="/view-businesses">
-                      View All Businesses
                     </Link>
                   </li>
                 </ul>
@@ -146,8 +136,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* Add a route for the "View All Businesses" page */}
-          <Route path="/view-businesses" element={<div>All Businesses Page</div>} />
+          {/* Remove route for the "View All Businesses" page */}
         </Routes>
       </div>
     </div>
